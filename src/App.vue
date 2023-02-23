@@ -1,24 +1,22 @@
 <template>
-<div class="main">
-	<TheMap />
-</div>
+  <div class="main">
+    <TheMap />
+  </div>
 </template>
 
 <script>
-import  TheMap from '@/components/TheMap'
+import TheMap from "@/components/TheMap";
 export default {
   name: "index",
-	components:{
-  	TheMap,
-	},
+  components: {
+    TheMap,
+  },
   computed: {},
   props: {},
   data: () => ({}),
-  mounted() {
-  },
-  methods:{},
-
-}
+  mounted() {},
+  methods: {},
+};
 </script>
 
 <style scoped>

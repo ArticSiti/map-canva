@@ -16,15 +16,8 @@ export default {
   name: "index",
   computed: {},
   props: {},
-  data: () => ({}),
-  mounted() {
-    ymaps.ready(this.mapInit);
-  },
-  methods: {
-    mapInit() {
-      let i;
-      let pl;
-      let coords = [
+  data: () => ({
+    coords: [
         {
           id: 1,
           center: [21.425060, 39.819982]
@@ -37,14 +30,20 @@ export default {
           id: 3,
           center: [21.415822, 39.818945]
         }
-      ];
+      ]
+  }),
+  mounted() {
+    ymaps.ready(this.mapInit);
+  },
+  methods: {
+    mapInit() {
       let myMap = new ymaps.Map("map", {
         center: [21.422463, 39.825928],
         zoom: 14,
       });
 
-      coords.forEach(item => {
-        pl = new ymaps.Placemark(item.center);
+      this.coords.forEach(item => {
+        let pl = new ymaps.Placemark(item.center);
         myMap.geoObjects.add(pl);
       })
     },

@@ -18,19 +18,25 @@ export default {
   props: {},
   data: () => ({
     coords: [
-        {
-          id: 1,
-          center: [21.425060, 39.819982]
-        },
-        {
-          id: 2,
-          center: [21.424975, 39.833812]
-        },
-        {
-          id: 3,
-          center: [21.415822, 39.818945]
-        }
-      ]
+      {
+        id: 1,
+        center: [21.42506, 39.819982],
+        name: "Палатка 1",
+        counter: 8,
+      },
+      {
+        id: 2,
+        center: [21.424975, 39.833812],
+        name: "Палатка 2",
+        counter: 12,
+      },
+      {
+        id: 3,
+        center: [21.415822, 39.818945],
+        name: "Палатка 3",
+        counter: 22,
+      },
+    ],
   }),
   mounted() {
     ymaps.ready(this.mapInit);
@@ -42,10 +48,16 @@ export default {
         zoom: 14,
       });
 
-      this.coords.forEach(item => {
-        let pl = new ymaps.Placemark(item.center);
+      this.coords.forEach((item) => {
+        let pl = new ymaps.Placemark(item.center, {
+          balloonContentHeader: item.name,
+          balloonContentBody: `${item.counter} мест`,
+        });
         myMap.geoObjects.add(pl);
-      })
+      });
+
+      myMap.controls.remove("geolocationControl"); // удаляем геолокацию
+      myMap.controls.remove("searchControl");
     },
   },
 };
@@ -54,7 +66,7 @@ export default {
 <style lang="scss" scoped>
 #map {
   width: 100%;
-  height: 100%;
-  min-height: 300px;
+  height: 100vh;
+  // min-height: 300px;
 }
 </style>
